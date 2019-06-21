@@ -295,11 +295,20 @@ function! ctrlp#funky#funky(word, ...)
     let s:winnr = winnr()
     let s:bufnr = bufnr('')
     call ctrlp#funky#init(s:bufnr)
-    call fzf#run({
-                \ 'source': s:candidates, 
-                \ 'sink': function('ctrlp#funky#accept'),
-                \ 'down':'40%' ,
-                \ })
+    if has('nvim') && exists('*nvim_win_set_config')
+        call fzf#run({
+                    \ 'source': s:candidates, 
+                    \ 'sink': function('ctrlp#funky#accept'),
+                    \ 'down':'40%' ,
+                    \ 'window':'call ctrlp#funky#floating()'
+                    \ })
+    else
+        call fzf#run({
+                    \ 'source': s:candidates, 
+                    \ 'sink': function('ctrlp#funky#accept'),
+                    \ 'down':'40%' ,
+                    \ })
+    endif
   finally
     if exists('default_input_save')
       let g:ctrlp_default_input = default_input_save
@@ -493,6 +502,41 @@ let s:cache = ctrlp#funky#cache#new(cache_dir)
 let s:use_cache = s:cache.is_enabled()
 
 call s:fu.debug('INFO: use_cache? ' . (s:use_cache ? 'TRUE' : 'FALSE'))
+
+if has('nvim') && exists('*nvim_win_set_config')
+    function! ctrlp#funky#floating()
+        let height = &lines - 3
+        let width = float2nr(&columns - (&columns * 2 / 10))
+        let col = float2nr((&columns - width) / 2)
+
+        let col_offset = &columns / 6
+
+        let opts = {
+                    \ 'relative': 'editor',
+                    \ 'row': height * 0.3,
+                    \ 'col': col + col_offset,
+                    \ 'width': width * 2 / 3,
+                    \ 'height': height / 2
+                    \ }
+
+        let buf = nvim_create_buf(v:false, v:true)
+
+        let win = nvim_open_win(buf, v:true, opts)
+
+        call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+        setlocal
+                    \ buftype=nofile
+                    \ nobuflisted
+                    \ bufhidden=hide
+                    \ nonumber
+                    \ norelativenumber
+                    \ signcolumn=no
+        if mode() ==# 't'
+            call feedkeys('i')
+        endif
+    endfunction
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

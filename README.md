@@ -2,6 +2,8 @@ ctrlp-funky
 ============
 A super simple function navigator for [fzf](https://github.com/junegunn/fzf), porting from [ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky).
 
+Support neovim's floating window feature!
+
 SYNOPSIS
 ----------
 This is a ctrlp.vim extension. It simply navigates and jumps to function definitions from the current file without ctags. It just searches for function definitions or equivalent lines using regular expressions, therefore some languages' abstractions aren't accurate because of them being hard to parse.
