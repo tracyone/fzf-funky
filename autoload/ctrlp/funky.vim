@@ -71,16 +71,6 @@ endfunction
 
 " script local funcs {{{
 " TODO: some functions should be defined under ctrlp#funky#utils namespace
-function! s:syntax(filetype)
-  if !ctrlp#nosy()
-    if s:syntax_highlight
-      let &filetype = a:filetype
-    endif
-
-    call ctrlp#hicheck('CtrlPTabExtra', 'Comment')
-    syn match CtrlPTabExtra '\t\zs#.*:\d\+:\d\+$'
-  endif
-endfunction
 
 function! s:error(msg)
     echohl ErrorMsg | echomsg a:msg | echohl NONE
@@ -221,6 +211,7 @@ endfunction
 "
 " Return: List
 " FIXME: refactoring
+let s:candidates = []
 function! ctrlp#funky#init(bufnr)
   " ControlP buffer is active when this function is invoked
   try
@@ -241,7 +232,7 @@ function! ctrlp#funky#init(bufnr)
       let bufs = [a:bufnr]
     endif
 
-    let candidates = ctrlp#funky#candidates(bufs)
+    let s:candidates = ctrlp#funky#candidates(bufs)
 
     " activate the former buffer
     execute 'buffer ' . bufname(a:bufnr)
@@ -249,9 +240,8 @@ function! ctrlp#funky#init(bufnr)
     let filetype = s:filetype(a:bufnr)
 
     execute ctrlp_winnr . 'wincmd w'
-    if len(bufs) == 1 | call s:syntax(filetype) | endif
 
-    return candidates
+    return s:candidates
   finally
     let &eventignore = saved_ei
   endtry
@@ -303,7 +293,13 @@ function! ctrlp#funky#funky(word, ...)
     let s:is_multi_buffers = get(opts, 'multi_buffers', 0)
 
     let s:winnr = winnr()
-    call ctrlp#init(ctrlp#funky#id())
+    let s:bufnr = bufnr('')
+    call ctrlp#funky#init(s:bufnr)
+    call fzf#run({
+                \ 'source': s:candidates, 
+                \ 'sink': function('ctrlp#funky#accept'),
+                \ 'down':'40%' ,
+                \ })
   finally
     if exists('default_input_save')
       let g:ctrlp_default_input = default_input_save
@@ -399,22 +395,23 @@ endfunction
 "  a:mode   the mode that has been chosen by pressing <cr> <c-v> <c-t> or <c-x>
 "           the values are 'e', 'v', 't' and 'h', respectively
 "  a:str    the selected string
-function! ctrlp#funky#accept(mode, str)
+function! ctrlp#funky#accept(item)
   " always back to former window
-  call ctrlp#exit()
+  let l:pos = stridx(a:item, ' ')
+  let l:str = a:item[pos+1:-1]
 
-  let bufnr = matchstr(a:str, ':\zs\d\+\ze:')
+  let bufnr = matchstr(l:str, ':\zs\d\+\ze:')
   " should be current window = former window
-  let lnum = matchstr(a:str, '\d\+$')
+  let lnum = matchstr(l:str, '\d\+$')
   execute 'noautocmd ' . get(s:, 'winnr', 1) . 'wincmd w'
-  call s:load_buffer_by_number(bufnr, a:mode)
+  call s:load_buffer_by_number(bufnr, 'e')
   call cursor(lnum, 1)
 
   call s:after_jump()
 
   if !s:sort_by_mru | return | endif
 
-  call s:mru.prioritise(bufnr, s:str2def(a:str))
+  call s:mru.prioritise(bufnr, s:str2def(l:str))
 endfunction
 
 function! ctrlp#funky#exit()
