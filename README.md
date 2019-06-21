@@ -1,6 +1,6 @@
 ctrlp-funky
 ============
-A super simple function navigator for ctrlp.vim.  
+A super simple function navigator for [fzf](https://github.com/junegunn/fzf), porting from [ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky).
 
 SYNOPSIS
 ----------
@@ -27,7 +27,12 @@ INSTALLATION
 ### Plugin managers
 It is recommended to install the plugin using plugin managers such as minpac, vim-plug, pathogen, Vundle, Dein.vim etc.
 You can copy/paste a line below if you use vim-plug:
-`Plug 'tacahiroy/ctrlp-funky'`
+
+```vim
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tracyone/fzf-funky',{'on': 'CtrlPFunky'}
+```
 
 ### Manual installation
 If you use neither of the plugin management systems, copy _autoload_ and _plugin_ directories to _.vim_ directory.
