@@ -6,7 +6,7 @@ Support neovim's floating window feature!
 
 SYNOPSIS
 ----------
-This is a [fzf.vim](https://git::@github.com/junegunn/fzf.vim.git) extension. It simply navigates and jumps to function definitions from the current file without ctags. It just searches for function definitions or equivalent lines using regular expressions, therefore some languages' abstractions aren't accurate because of them being hard to parse.
+This is a [fzf](https://github.com/junegunn/fzf) vim extension. It simply navigates and jumps to function definitions from the current file without ctags. It just searches for function definitions or equivalent lines using regular expressions, therefore some languages' abstractions aren't accurate because of them being hard to parse.
 
 One of advantages of this plugin is that no configuration is required in most cases, so it starts working right after installation with no ctags required.
 *If you want to have a more accurate list of function defs, you should use other ctags-based tools, etc.*
@@ -32,7 +32,6 @@ You can copy/paste a line below if you use vim-plug:
 
 ```vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'tracyone/fzf-funky',{'on': 'CtrlPFunky'}
 ```
 
@@ -58,7 +57,6 @@ LINK
 * [ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
 * [vim.org/ctrlp-funky](http://www.vim.org/scripts/script.php?script_id=4592)
 * [junegunn/fzf](https://github.com/junegunn/fzf)
-* [fzf.vim](https://git::@github.com/junegunn/fzf.vim.git)
 
 
 LICENSE
