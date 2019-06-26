@@ -300,13 +300,15 @@ function! ctrlp#funky#funky(word, ...)
                     \ 'source': s:candidates, 
                     \ 'sink': function('ctrlp#funky#accept'),
                     \ 'down':'40%' ,
-                    \ 'window':'call ctrlp#funky#floating()'
+                    \ 'window':'call ctrlp#funky#floating()',
+                    \ 'options' : '-m --prompt "Funky> "'
                     \ })
     else
         call fzf#run({
                     \ 'source': s:candidates, 
                     \ 'sink': function('ctrlp#funky#accept'),
                     \ 'down':'40%' ,
+                    \ 'options' : '-m --prompt "Funky> "'
                     \ })
     endif
   finally
