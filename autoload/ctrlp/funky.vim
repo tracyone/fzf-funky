@@ -298,17 +298,19 @@ function! ctrlp#funky#funky(word, ...)
     if has('nvim') && exists('*nvim_win_set_config')
         call fzf#run({
                     \ 'source': s:candidates, 
-                    \ 'sink': function('ctrlp#funky#accept'),
+                    \ 'sink*': function('ctrlp#funky#accept'),
                     \ 'down':'40%' ,
                     \ 'window':'call ctrlp#funky#floating()',
-                    \ 'options' : '-m --prompt "Funky> "'
+                    \ 'options' : ' --ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : '.
+                    \              '-m --prompt "Funky> "',
                     \ })
     else
         call fzf#run({
                     \ 'source': s:candidates, 
-                    \ 'sink': function('ctrlp#funky#accept'),
+                    \ 'sink*': function('ctrlp#funky#accept'),
                     \ 'down':'40%' ,
-                    \ 'options' : '-m --prompt "Funky> "'
+                    \ 'options' : ' --ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : '.
+                    \              '-m --prompt "Funky> "',
                     \ })
     endif
   finally
@@ -408,14 +410,19 @@ endfunction
 "  a:str    the selected string
 function! ctrlp#funky#accept(item)
   " always back to former window
-  let l:pos = stridx(a:item, ' ')
-  let l:str = a:item[pos+1:-1]
+  if len(a:item) < 2 | return | endif
+  let l:pos = stridx(a:item[1], ' ')
+  let l:str = a:item[1][pos+1:-1]
+
+  let cmd = get({'ctrl-x': 'h',
+               \ 'ctrl-v': 'v',
+               \ 'ctrl-t': 't'}, a:item[0], 'e')
 
   let bufnr = matchstr(l:str, ':\zs\d\+\ze:')
   " should be current window = former window
   let lnum = matchstr(l:str, '\d\+$')
   execute 'noautocmd ' . get(s:, 'winnr', 1) . 'wincmd w'
-  call s:load_buffer_by_number(bufnr, 'e')
+  call s:load_buffer_by_number(bufnr, cmd)
   call cursor(lnum, 1)
 
   call s:after_jump()
