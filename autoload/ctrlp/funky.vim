@@ -296,22 +296,16 @@ function! ctrlp#funky#funky(word, ...)
     let s:bufnr = bufnr('')
     call ctrlp#funky#init(s:bufnr)
     if has('nvim') && exists('*nvim_win_set_config')
-        call fzf#run({
+        call fzf#run(fzf#wrap({
                     \ 'source': s:candidates, 
                     \ 'sink*': function('ctrlp#funky#accept'),
-                    \ 'down':'40%' ,
-                    \ 'window':'call ctrlp#funky#floating()',
-                    \ 'options' : ' --ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : '.
-                    \              '-m --prompt "Funky> "',
-                    \ })
+                    \ 'window':'call ctrlp#funky#floating()'
+                    \ }))
     else
-        call fzf#run({
+        call fzf#run(fzf#wrap({
                     \ 'source': s:candidates, 
-                    \ 'sink*': function('ctrlp#funky#accept'),
-                    \ 'down':'40%' ,
-                    \ 'options' : ' --ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : '.
-                    \              '-m --prompt "Funky> "',
-                    \ })
+                    \ 'sink*': function('ctrlp#funky#accept')
+                    \ }))
     endif
   finally
     if exists('default_input_save')
