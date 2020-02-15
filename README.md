@@ -2,7 +2,8 @@ fzf-funky
 ============
 A super simple function navigator for [fzf](https://github.com/junegunn/fzf), porting from [ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky).
 
-Support neovim's floating window feature!
+- Support neovim's floating window feature!
+- Support vim's popup window feature!
 
 SYNOPSIS
 ----------

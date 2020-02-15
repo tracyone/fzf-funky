@@ -311,6 +311,7 @@ function! ctrlp#funky#funky(word, ...)
                     \ 'down':'40%' ,
                     \ 'options' : ' --ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : '.
                     \              '-m --prompt "Funky> "',
+                    \ 'window': { 'width': 0.6, 'height': 0.4 },
                     \ })
     endif
   finally
