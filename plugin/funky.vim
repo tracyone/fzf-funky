@@ -3,7 +3,7 @@
 " Author: Takahiro Yoshihara <tacahiroy@gmail.com>
 " License: The MIT License
 
-command! -nargs=? CtrlPFunky              call ctrlp#funky#funky(<q-args>)
+command! -nargs=? FzfFunky              call ctrlp#funky#funky(<q-args>)
 "Not implement yet..
 "command! -nargs=? CtrlPFunkyMulti         call ctrlp#funky#funky(<q-args>, { 'multi_buffers': 1 })
 "" command! -nargs=? CtrlPFunkyDeep          call ctrlp#funky#funky(<q-args>, { 'deep': 1, 'mutli_buffers': 0 })

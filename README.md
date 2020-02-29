@@ -15,7 +15,7 @@ One of advantages of this plugin is that no configuration is required in most ca
 [![asciicast](https://asciinema.org/a/253055.svg)](https://asciinema.org/a/253055)
 
 ### Supported filetypes:
-See [ctrlp-funky.txt](https://github.com/tacahiroy/ctrlp-funky/blob/master/doc/ctrlp-funky.txt#L22)
+See [ctrlp-funky.txt](https://github.com/tracyone/fzf-funky/blob/master/doc/ctrlp-funky.txt#L22)
 
 
 PREMISE
@@ -33,7 +33,7 @@ You can copy/paste a line below if you use vim-plug:
 
 ```vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tracyone/fzf-funky',{'on': 'CtrlPFunky'}
+Plug 'tracyone/fzf-funky',{'on': 'FzfFunky'}
 ```
 
 ### Manual installation
@@ -45,9 +45,9 @@ CONFIGURATION
 --------------
 It should be useful to define key mappings like this:
 ```vim
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>fu :FzfFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>fU :execute 'FzfFunky ' . expand('<cword>')<Cr>
 ```
 
 
