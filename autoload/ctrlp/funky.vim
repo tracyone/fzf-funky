@@ -220,7 +220,7 @@ function! ctrlp#funky#init(bufnr)
     let &eventignore = 'BufLeave'
 
     let ctrlp_winnr = bufwinnr(bufnr(''))
-    execute bufwinnr(a:bufnr) . 'wincmd w'
+    noautocmd execute bufwinnr(a:bufnr) . 'wincmd w'
     let pos = getpos('.')
 
     " TODO: Need to fix priority for options
@@ -235,11 +235,11 @@ function! ctrlp#funky#init(bufnr)
     let s:candidates = ctrlp#funky#candidates(bufs)
 
     " activate the former buffer
-    execute 'buffer ' . bufname(a:bufnr)
+    noautocmd execute 'buffer ' . bufname(a:bufnr)
     call setpos('.', pos)
     let filetype = s:filetype(a:bufnr)
 
-    execute ctrlp_winnr . 'wincmd w'
+    noautocmd execute ctrlp_winnr . 'wincmd w'
 
     return s:candidates
   finally
