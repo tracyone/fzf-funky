@@ -1,6 +1,6 @@
 fzf-funky
 ============
-A super simple function navigator for [fzf](https://github.com/junegunn/fzf), porting from [ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky).
+A super simple function navigator for [fzf](https://github.com/junegunn/fzf), porting from [ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky).It is a very useful plugin when ctags is not exist or lsp is not support.
 
 - Support neovim's floating window feature!
 - Support vim's popup window feature!
