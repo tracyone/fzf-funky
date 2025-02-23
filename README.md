@@ -14,12 +14,68 @@ One of advantages of this plugin is that no configuration is required in most ca
 
 [![asciicast](https://asciinema.org/a/253055.svg)](https://asciinema.org/a/253055)
 
+Support preview:
+
+![Image](https://github.com/user-attachments/assets/f6e393ae-3416-46eb-a6ed-b9d78af755e7)
+
 ### Supported filetypes:
-See [ctrlp-funky.txt](https://github.com/tracyone/fzf-funky/blob/master/doc/ctrlp-funky.txt#L22)
+
+* c
+* carbon
+* cf (ColdFusion)
+* clojure
+* cmm (TRACE32)
+* coffee-script
+* coldfusion
+* cpp (C++)
+* cs (C#)
+* css (css, scss)
+* dart
+* elixir
+* elm
+* fish (fish-shell)
+* go (Golang)
+* graphql
+* groovy
+* haskell
+* html/xhtml
+* java
+* javascript
+* Jenkinsfile (Jenkins pipeline script)
+* jinja (template engine for Python)
+* lua
+* make (Makefile)
+* markdown
+* moon (MoonScript)
+* nerdtree
+* objc (Objective-C)
+* perl
+* php
+* plsql (PL/SQL)
+* proto (Protocol Buffers)
+* python
+* r
+* rmd (rmarkdown)
+* ruby (ruby, rake, rspec and chef recipe)
+* rust
+* scala
+* sh (bash, dash, fish and zsh)
+* sql
+* tex (LaTeX)
+* tf (terraform)
+* thrift
+* toml
+* typescript
+* vb (Visual Basic)
+* vim
+* vue (Vue.js)
+* yaml
+* zig
 
 
 PREMISE
 ----------
+
 First of all, I believe you're a user of a great Vim plugin called [fzf.vim](https://git::@github.com/junegunn/fzf.vim.git).
 Otherwise, you need to install fzf.vim before you start using this plugin.
 
@@ -50,8 +106,6 @@ nnoremap <Leader>fu :FzfFunky<Cr>
 nnoremap <Leader>fU :execute 'FzfFunky ' . expand('<cword>')<Cr>
 ```
 
-
-
 LINK
 -------
 
@@ -63,7 +117,7 @@ LINK
 LICENSE
 -------
 
-Copyright (C) 2012-2019 Takahiro Yoshihara. Distributed under the MIT License.
+Copyright (C) 2012-2020 Takahiro Yoshihara. Distributed under the MIT License.
 
 [1]: http://i.imgur.com/yO4PWAF.png
 [2]: http://i.imgur.com/CnKui5H.png
